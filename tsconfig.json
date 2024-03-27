@@ -1,0 +1,23 @@
+{
+  "include": ["remix.env.d.ts", "**/*.ts", "**/*.tsx", "app/routes/edge.jsx", "app/root.jsx", "app/routes/index.jsx","app/routes/form.jsx","app/routes/loginsignup.jsx"],
+  "compilerOptions": {
+    "lib": ["DOM", "DOM.Iterable", "ES2019"],
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "jsx": "react-jsx",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "target": "ES2019",
+    "strict": true,
+    "allowJs": true,
+    "forceConsistentCasingInFileNames": true,
+    "baseUrl": ".",
+    "paths": {
+      "~/*": ["./app/*"],
+      "@models/*": ["./models/*"]
+    },
+
+    // Remix takes care of building everything in `remix build`.
+    "noEmit": true
+  }
+}
