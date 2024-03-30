@@ -6,7 +6,8 @@ module.exports = function(express) {
     })
     route.post("/add_person",person_ctrl.add);
     route.get("/get_person/:nationalId",person_ctrl.get);
-    route.put("/update_person/:nationalId")
+    route.put("/update_person/:nationalId",person_ctrl.update);
+    route.delete("/delete_person/:nationalId",person_ctrl.delete);
     return route;   
     
 };
