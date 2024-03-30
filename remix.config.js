@@ -6,8 +6,9 @@ const db = require('./models');
 const { createRequestHandler } = require('@remix-run/express');
 const express = require('express');
 const expressApp = express();
+var bodyParser = require('body-parser');
 //const route =require ('./app/routes')
-
+const route = require ('./routes/routes');
 module.exports = {
   ignoredRouteFiles: ['**/.*'],
   tailwind: true,
@@ -25,9 +26,14 @@ module.exports = {
 }).catch(error => {
   console.error("Error synchronizing database:", error);
 });
-expressApp.use('/api_V1',(req, res) => {
-  res.json({ message: 'Hello from Express!' });
-});
+//body parser
+expressApp.use(bodyParser.json());
+expressApp.use(bodyParser.urlencoded({
+    extended: true
+}));
+expressApp.use('/api_V1',route(express)
+);
+
 
 const PORT = process.env.PORT || 3002;
 expressApp.listen(PORT, () => {

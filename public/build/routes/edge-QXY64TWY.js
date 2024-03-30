@@ -1,0 +1,1 @@
+import{d as t,g as i}from"/build/_shared/chunk-C46C5URB.js";var e=t(i());function o(){return(0,e.jsx)("div",{style:{fontFamily:"system-ui, sans-serif",lineHeight:"1.4"},children:(0,e.jsx)("h1",{children:"Welcome to Remix@Edge"})})}export{o as default};
