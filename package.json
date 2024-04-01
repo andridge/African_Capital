@@ -3,7 +3,7 @@
   "sideEffects": false,
   "scripts": {
     "build": "remix build",
-    "dev": " nodemon remix.config.js remix dev"
+    "dev": "remix dev"
   },
   "dependencies": {
     "@headlessui/react": "^1.7.16",

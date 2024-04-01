@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../app/routes/edge.jsx"],
+  "sourcesContent": ["export const config = { runtime: \"edge\" };\n\nexport default function Edge() {\n  return (\n    <div style={{ fontFamily: \"system-ui, sans-serif\", lineHeight: \"1.4\" }}>\n      <h1>Welcome to Remix@Edge</h1>\n    </div>\n  );\n}\n"],
+  "mappings": ";;;;;;AAKM;AAHS,SAAR,OAAwB;AAC7B,SACE,mDAAC,SAAI,OAAO,EAAE,YAAY,yBAAyB,YAAY,MAAM,GACnE,6DAAC,QAAG,qCAAJ;AAAA;AAAA;AAAA;AAAA,SAAyB,KAD3B;AAAA;AAAA;AAAA;AAAA,SAEA;AAEJ;",
+  "names": []
+}

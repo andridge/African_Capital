@@ -1,12 +1,33 @@
-const{Person,Sequelize}  = require("../models");
+const {employment,Sequelize} = require("../models");
 let self = {};
-self.delete = async (req,res)=>{
+self.delete = async(req,res)=>{
     try{
-        //
-        let nationalId =req.params.nationalId;
-        let data = await Person.destroy({
+        let id = req.params.id;
+        let data = await employment.destroy({
             where:{
-                nationalId:nationalId
+                id:id
+            }
+        });
+        return res.json({
+            status:"ok",
+            data:data
+        })
+    }catch(error){
+          // Handle errors properly
+          console.error(error);
+          return res.status(500).json({
+              status: "error",
+              data: error.message // Return error message instead of the entire error object
+          });
+    }
+}
+self.update = async(req,res)=>{
+    try{
+        let id = req.params.id;
+        let body=req.body;
+        let data = await employment.update(body,{
+            where:{
+                id:id
             }
         });
         return res.json({
@@ -14,8 +35,6 @@ self.delete = async (req,res)=>{
             data:data,
 
         })
-        
-
     }catch(error){
           // Handle errors properly
           console.error(error);
@@ -25,46 +44,21 @@ self.delete = async (req,res)=>{
           });
     }
 }
-self.update = async (req,res)=>{
+self.get =async (req,res) =>{
     try{
-        //
-        let nationalId = req.params.nationalId;
-        let body = req.body;
-        let data = await Person.update(body,{
-            where:{
-                nationalId:nationalId
+        let id = req.params.id;
+        let data  = await employment.findOne({
+            attributes:["jobTitle","dateOfEmplyoment","emplyeeType","employerFirstName","employerSecondName","employerTel","physicalAddress"],
+             where:{
+                id:id
             }
-        })
-        return res.json({
-            status:"ok",
-            data:data,
-
-        })
-        
-
-    }catch(error){
-          // Handle errors properly
-          console.error(error);
-          return res.status(500).json({
-              status: "error",
-              data: error.message // Return error message instead of the entire error object
-          });
-    }
-}
-self.get = async (req,res)=>{
-    try{
-        let nationalId = req.params.nationalId;
-        let data = await Person.findOne({
-            atrributes:["firstName","lastName","nationality","kraPin","postalAddress","Town","pfNo","dateOfBirth","telephone","physicalAddress","email","password","nationalId"],
-            where:{
-                nationalId:nationalId,
-            },
         });
         return res.json({
             status:"ok",
             data:data,
             
         })
+
     }catch(error){
           // Handle errors properly
           console.error(error);
@@ -73,16 +67,17 @@ self.get = async (req,res)=>{
               data: error.message // Return error message instead of the entire error object
           });
     }
+
 }
-self.add = async (req, res) => {
-    try {
-        let body = req.body;
-        let data = await Person.create(body); // Make sure to await the creation of the Person record
+self.add = async (req,res) =>{
+    try{
+        let body  = req.body;
+        let data = await employment.create(body);
         return res.json({
             status: "ok",
             data: data
         });
-    } catch (error) {
+    }catch (error) {
         // Handle errors properly
         console.error(error);
         return res.status(500).json({
@@ -90,6 +85,5 @@ self.add = async (req, res) => {
             data: error.message // Return error message instead of the entire error object
         });
     }
-};
-
+}
 module.exports = self;

@@ -1,12 +1,12 @@
-const{Person,Sequelize}  = require("../models");
-let self = {};
-self.delete = async (req,res)=>{
+const{gurantors,Sequelize} = require("../models");
+let self= {};
+self.delete = async(req,res)=>{
     try{
-        //
-        let nationalId =req.params.nationalId;
-        let data = await Person.destroy({
+        let id = req.params.id;
+        let body = req.body;
+        let data =await gurantors.destroy({
             where:{
-                nationalId:nationalId
+                id:id
             }
         });
         return res.json({
@@ -14,7 +14,6 @@ self.delete = async (req,res)=>{
             data:data,
 
         })
-        
 
     }catch(error){
           // Handle errors properly
@@ -25,22 +24,20 @@ self.delete = async (req,res)=>{
           });
     }
 }
-self.update = async (req,res)=>{
+self.update = async(req,res)=>{
     try{
-        //
-        let nationalId = req.params.nationalId;
+        let id = req.params.id;
         let body = req.body;
-        let data = await Person.update(body,{
+        let data = await gurantors.update(body,{
             where:{
-                nationalId:nationalId
+                id:id
             }
-        })
+        });
         return res.json({
             status:"ok",
             data:data,
 
         })
-        
 
     }catch(error){
           // Handle errors properly
@@ -53,36 +50,20 @@ self.update = async (req,res)=>{
 }
 self.get = async (req,res)=>{
     try{
-        let nationalId = req.params.nationalId;
-        let data = await Person.findOne({
-            atrributes:["firstName","lastName","nationality","kraPin","postalAddress","Town","pfNo","dateOfBirth","telephone","physicalAddress","email","password","nationalId"],
+        let id = req.params.id;
+        let data = await gurantors.findOne({
+            attributes:["firstName","lastName","organisation","postalAddress","telephone"],
             where:{
-                nationalId:nationalId,
-            },
+                id:id
+            }
+
         });
         return res.json({
             status:"ok",
             data:data,
             
         })
-    }catch(error){
-          // Handle errors properly
-          console.error(error);
-          return res.status(500).json({
-              status: "error",
-              data: error.message // Return error message instead of the entire error object
-          });
-    }
-}
-self.add = async (req, res) => {
-    try {
-        let body = req.body;
-        let data = await Person.create(body); // Make sure to await the creation of the Person record
-        return res.json({
-            status: "ok",
-            data: data
-        });
-    } catch (error) {
+    }catch (error) {
         // Handle errors properly
         console.error(error);
         return res.status(500).json({
@@ -90,6 +71,22 @@ self.add = async (req, res) => {
             data: error.message // Return error message instead of the entire error object
         });
     }
-};
-
+}
+self.add = async (req,res)=>{
+    try{
+        let body = req.body;
+        let data = await gurantors.create(body);
+        return res.json({
+            status: "ok",
+            data: data
+        });
+    }catch (error) {
+        // Handle errors properly
+        console.error(error);
+        return res.status(500).json({
+            status: "error",
+            data: error.message // Return error message instead of the entire error object
+        });
+    }
+}
 module.exports = self;
